@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.MemberMapper">
+<insert id="insert">
+    insert into jinuk_member (userid, userpw, username, phonenumber)
+    values (#{userid}, #{userpw}, #{username}, #{phonenumber})
+</insert>
+<insert id="insertAuth">
+    insert into jinuk_member_auth (userid, auth)
+    values (#{userid}, 'ROLE_USER')
+</insert>
+</mapper>

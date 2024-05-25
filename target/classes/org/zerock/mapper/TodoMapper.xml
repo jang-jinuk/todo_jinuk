@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.TodoMapper">
+	<select id="getList" resultType="org.zerock.domain.TodoVO">
+	    select * from jinuk_todo where userid = #{userid}
+	 </select>
+	
+	<insert id="insert">
+		insert into jinuk_todo (tno, title, userid)
+		values (seq_todo.nextval, #{title}, #{userid})
+	</insert>
+	
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="tno" order="BEFORE" resultType="long">
+		    select seq_todo.nextval from dual
+		</selectKey>
+		
+		insert into jinuk_todo(tno, title, userid)
+		values (#{tno}, #{title}, #{userid})
+	</insert>
+	
+	<select id="read" resultType="org.zerock.domain.TodoVO">
+		select * from jinuk_todo where tno = #{tno}
+	</select>
+	
+	<delete id="delete">
+		delete from jinuk_todo where tno = #{tno}
+	</delete>
+	
+	<update id="update">
+		update jinuk_todo
+		set title= #{title}
+		where tno = #{tno}
+	</update>
+	
+	<update id="complete">
+		update jinuk_todo
+		set enddate = sysdate
+		where tno = #{tno}
+	</update>
+</mapper>
